@@ -1,3 +1,8 @@
+---
+layout: default
+title: PINN Summary
+---
+
 # Physics-Informed Neural Networks for Steady-State Flow
 
 Implementation and summary of the PINN method for solving PDEs using deep learning.

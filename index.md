@@ -19,9 +19,9 @@ title: PINN Summary
 </script>
 
 
-# Physics-Informed Neural Networks
+# Reproducing the Foundational PINNs Paper: My Implementation and Insights
 
-As a first step in learning machine learning techniques related to physics, I decided to read this foundational and original paper on Physics-Informed Neural Networks (PINNs). Its implementation is relatively simple, making it a good starting point for beginners. In this post, I’ll walk through how PINNs integrate physical laws into neural networks from the perspective of someone new to the field, based on what I learned from the paper. My implementation can be viewed from this link: [View Implementation](https://github.com/skato-kx/skato-kx.github.io-pinn-research-)
+As a first step in exploring machine learning techniques applied to physics, I chose to dive into the foundational paper on Physics-Informed Neural Networks (PINNs). This approach stood out because its implementation is relatively straightforward, making it an excellent starting point for beginners like me. In this post, I aim to explain how PINNs incorporate physical laws into neural networks from the perspective of a newcomer to the field. To make the concepts more accessible, I’ve summarized the key ideas from the paper in a way that prioritizes intuitive understanding, deliberately avoiding the intricate details of complex calculations. My goal was to help beginners grasp the essence of PINNs without getting lost in technicalities. Additionally, I’ve created a clear and well-documented implementation, complete with detailed, line-by-line comments to explain each operation, making it easy to follow. You can view my implementation here: [View Implementation](https://github.com/skato-kx/skato-kx.github.io-pinn-research-)
 
 ## 🔗 Paper Info
 

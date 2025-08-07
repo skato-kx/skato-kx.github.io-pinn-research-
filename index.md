@@ -91,12 +91,6 @@ If the network’s predictions are truly consistent with the underlying PDE, **a
 
 Of course, as with the continuous-time models, the total loss function in this case also includes terms for supervised data (when available), as well as for initial and boundary conditions. All of these components are combined to guide the network toward solutions that are not only consistent with the discretized PDE, but also respect the physical constraints and any known data.
 
-## 💭 Final Thoughts & Reflections
-
-This paper illustrates how Physics-Informed Neural Networks (PINNs) can offer data-driven solutions to problems governed by physical laws. It presents various approaches, such as those described above, and goes further into details that I haven't covered here—such as specific PDE examples, how they are reformulated for PINNs, and how the loss functions are constructed in combination with initial and boundary conditions, depending on the physical phenomena being modeled.
-
-What I personally found most fascinating was how the mathematical and physical knowledge that I had previously treated as abstract, test-oriented content suddenly became practical and meaningful within the context of machine learning. This experience has made me eager to explore more techniques in physics-related machine learning, and to better understand how these fundamental principles can be applied in real-world modeling.
-
 ## 🛠️ Implementation
 
 `continuous_time_model.ipynb` contains an implementation of a continuous-time PINN model based on the Burgers' equation.
@@ -112,3 +106,9 @@ The following plots show $u$ versus $x$ at two fixed time steps, $t = 0.25$ and 
 ![alt text](image-1.png)
 
 Overall, the results closely match those shown in the original paper and align well with the expected behavior of the Burgers' equation (PDE). This demonstrates that the model has successfully learned the correct dynamics, and the implementation is working as intended.
+
+## 💭 Final Thoughts & Reflections
+
+This paper illustrates how Physics-Informed Neural Networks (PINNs) can offer data-driven solutions to problems governed by physical laws. It presents various approaches, such as those described above, and goes further into details that I haven't covered here—such as specific PDE examples, how they are reformulated for PINNs, and how the loss functions are constructed in combination with initial and boundary conditions, depending on the physical phenomena being modeled.
+
+What I personally found most fascinating was how the mathematical and physical knowledge that I had previously treated as abstract, test-oriented content suddenly became practical and meaningful within the context of machine learning. This experience has made me eager to explore more techniques in physics-related machine learning, and to better understand how these fundamental principles can be applied in real-world modeling.

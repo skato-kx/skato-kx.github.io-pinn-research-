@@ -3,6 +3,12 @@ layout: default
 title: PINN Summary
 ---
 
+<!-- MathJax Script -->
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
 # Physics-Informed Neural Networks
 
 As a first step in learning machine learning techniques related to physics, I decided to read this foundational and original paper on Physics-Informed Neural Networks (PINNs). Its implementation is relatively simple, making it a good starting point for beginners. In this post, I’ll walk through how PINNs integrate physical laws into neural networks from the perspective of someone new to the field, based on what I learned from the paper.
@@ -36,7 +42,7 @@ PINNs can be broadly categorized into two types of approaches depending on how t
 ## Continuous-Time Models
 
 In this approach, the governing PDE can be rewritten into the general form:  
-\( u_t + \mathcal{N}[u; \lambda] = 0 \)  
+\( u_t + \mathcal{N}[u; \lambda] = 0 \),  
 where \( u \) is the solution, \( x \) and \( t \) are the space and time variables, and \( \lambda \) represents known parameters. All components of this equation—time derivatives, spatial derivatives, and other terms—can be expressed in terms of the predicted function \( u(x,t) \) and its derivatives.
 
 While this might sound abstract at first, the key idea is simple: since every PDE is, by definition, an equation, we can always rearrange it to isolate everything on one side and set the equation equal to zero—i.e., something = 0. This "something" can be calculated as long as we know the input variables \( x \) and \( t \), and the predicted output \( u \) from the neural network.
@@ -44,6 +50,34 @@ While this might sound abstract at first, the key idea is simple: since every PD
 So, by feeding arbitrary values of \( x \) and \( t \) into the network and computing this residual term, we can use it directly as part of the loss function. In other words, the network is trained not by minimizing the difference between predicted and ground-truth data, but by minimizing the violation of the physical law itself. This allows us to train a neural network without requiring labeled data, as long as we know the governing PDE.
 
 In practice, PINNs don't rely solely on the PDE residual. The loss function typically combines **multiple components**: a small amount of supervised data (when available), as well as terms that enforce **initial conditions** and **boundary conditions**, which are essential in physical problems. These components are all summed together to form the total loss, and the neural network is trained to minimize this combined value—effectively learning a solution that satisfies the governing PDE, adheres to the physical constraints, and fits any available data.
+
+## 🧾 Example: Applying PINNs to Burgers' Equation
+
+Here, we illustrate the method using the **Burgers' equation** as an example. This equation is used in the original PINNs paper, and I also used it in my own implementation. It represents a physical law that describes **nonlinear convection and diffusion phenomena**, and is written as:
+
+$$
+\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = \nu \frac{\partial^2 u}{\partial x^2}
+$$
+
+This can be rewritten in the general form used in the PINNs framework:
+
+$$
+u_t + \mathcal{N}[u; \lambda] = 0
+$$
+
+In the case of the Burgers' equation, this becomes:
+
+$$
+\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} - \nu \frac{\partial^2 u}{\partial x^2} = 0
+$$
+
+At this point, we define the **left-hand side** of the equation as a new function:
+
+$$
+f(x, t) := \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} - \nu \frac{\partial^2 u}{\partial x^2}
+$$
+
+By computing this function \( f \) using the output \( u(x, t) \) from the neural network and its derivatives (obtained via autograd), we can incorporate it into the loss function. The model is then trained to minimize this residual — that is, to make \( f(x, t) \approx 0 \) at all sampled collocation points.
 
 ## Discrete-Time Models
 
@@ -63,12 +97,18 @@ This paper illustrates how Physics-Informed Neural Networks (PINNs) can offer da
 
 What I personally found most fascinating was how the mathematical and physical knowledge that I had previously treated as abstract, test-oriented content suddenly became practical and meaningful within the context of machine learning. This experience has made me eager to explore more techniques in physics-related machine learning, and to better understand how these fundamental principles can be applied in real-world modeling.
 
-
-
 ## 🛠️ Implementation
 
-This repo contains:
-- 
+`continuous_time_model.ipynb` contains an implementation of a continuous-time PINN model based on the Burgers' equation.
 
 ## 📊 Results
 
+This is a heatmap of the solution \( u(x, t) \), where the horizontal and vertical axes represent space \( x \) and time \( t \), respectively. We can observe that the initial sine wave becomes sharper over time, with the peak concentrating near the center at \( x = 0 \).
+
+![alt text](image.png)
+
+The following plots show \( u \) versus \( x \) at two fixed time steps, \( t = 0.25 \) and \( t = 0.5 \). These also indicate that the wave becomes steeper near the center as time progresses.
+
+![alt text](image-1.png)
+
+Overall, the results closely match those shown in the original paper and align well with the expected behavior of the Burgers' equation (PDE). This demonstrates that the model has successfully learned the correct dynamics, and the implementation is working as intended.

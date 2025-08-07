@@ -61,7 +61,7 @@ So, by feeding arbitrary values of $x$ and $t$ into the network and computing th
 
 In practice, PINNs don't rely solely on the PDE residual. The loss function typically combines **multiple components**: a small amount of supervised data (when available), as well as terms that enforce **initial conditions** and **boundary conditions**, which are essential in physical problems. These components are all summed together to form the total loss, and the neural network is trained to minimize this combined value—effectively learning a solution that satisfies the governing PDE, adheres to the physical constraints, and fits any available data.
 
-## 🧾 Example: Applying PINNs to Burgers' Equation
+##　Example: Applying PINNs to Burgers' Equation
 
 Here, we illustrate the method using the **Burgers' equation** as an example. This equation is used in the original PINNs paper, and I also used it in my own implementation. It represents a physical law that describes **nonlinear convection and diffusion phenomena**, and is written as:
 
